@@ -38,7 +38,7 @@
 			$id = $_GET['id'];
 			
 			//query ke database SELECT tabel mahasiswa berdasarkan id = $id
-			$select = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE id='$id'") or die(mysqli_error($koneksi));
+			$select = mysqli_query($koneksi, "SELECT * FROM data WHERE id='$id'") or die(mysqli_error($koneksi));
 			
 			//jika hasil query = 0 maka muncul pesan error
 			if(mysqli_num_rows($select) == 0){
@@ -58,8 +58,9 @@
 			$nama			= $_POST['nama'];
 			$jenis_kelamin	= $_POST['jenis_kelamin'];
 			$jurusan		= $_POST['jurusan'];
+			$fakultas		= $_POST['fakultas'];
 			
-			$sql = mysqli_query($koneksi, "UPDATE mahasiswa SET nama='$nama', jenis_kelamin='$jenis_kelamin', jurusan='$jurusan' WHERE id='$id'") or die(mysqli_error($koneksi));
+			$sql = mysqli_query($koneksi, "UPDATE data SET nama='$nama', jenis_kelamin='$jenis_kelamin', jurusan='$jurusan', fakultas='$fakultas' WHERE id='$id'") or die(mysqli_error($koneksi));
 			
 			if($sql){
 				echo '<script>alert("Berhasil menyimpan data."); document.location="edit.php?id='.$id.'";</script>';
@@ -103,6 +104,16 @@
 						<option value="TEKNIK INFORMATIKA" <?php if($data['jurusan'] == 'TEKNIK INFORMATIKA'){ echo 'selected'; } ?>>TEKNIK INFORMATIKA</option>
 						<option value="TEKNIK SIPIL" <?php if($data['jurusan'] == 'TEKNIK SIPIL'){ echo 'selected'; } ?>>TEKNIK SIPIL</option>
 						<option value="PERTANIAN" <?php if($data['jurusan'] == 'PERTANIAN'){ echo 'selected'; } ?>>PERTANIAN</option>
+					</select>
+				</div>
+			</div>
+			<label class="col-sm-2 col-form-label">FAKULTAS</label>
+				<div class="col-sm-10">
+					<select name="fakultas" class="form-control" required>
+						<option value="">PILIH FAKULTAS</option>
+						<option value="TEKNIK KEDOKTERAN" <?php if($data['fakultas'] == 'TEKNIK KEDOKTERAN'){ echo 'selected'; } ?>>TEKNIK KEDOKTERAN</option>
+						<option value="TEKNIK KEGURUAN" <?php if($data['fakultas'] == 'TEKNIK KEGURUAN'){ echo 'selected'; } ?>>TEKNIK KEGURUAN</option>
+						<option value="KEROHANIAN" <?php if($data['fakultas'] == 'KEROHANIAN'){ echo 'selected'; } ?>>KEROHANIAN</option>
 					</select>
 				</div>
 			</div>

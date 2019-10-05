@@ -28,7 +28,7 @@
 	</nav>
 	
 	<div class="container" style="margin-top:20px">
-		<h2>Tambah Mahasiswa</h2>
+		<h2>Tambah Siswa</h2>
 		
 		<hr>
 		
@@ -38,11 +38,13 @@
 			$nama			= $_POST['nama'];
 			$jenis_kelamin	= $_POST['jenis_kelamin'];
 			$jurusan		= $_POST['jurusan'];
+			$fakultas		= $_POST['fakultas'];
+
 			
-			$cek = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE nim='$nim'") or die(mysqli_error($koneksi));
+			$cek = mysqli_query($koneksi, "SELECT * FROM data WHERE nim='$nim'") or die(mysqli_error($koneksi));
 			
 			if(mysqli_num_rows($cek) == 0){
-				$sql = mysqli_query($koneksi, "INSERT INTO mahasiswa(nim, nama, jenis_kelamin, jurusan) VALUES('$nim', '$nama', '$jenis_kelamin', '$jurusan')") or die(mysqli_error($koneksi));
+				$sql = mysqli_query($koneksi, "INSERT INTO data(nim, nama, jenis_kelamin, jurusan, fakultas) VALUES('$nim', '$nama', '$jenis_kelamin', '$jurusan', '$fakultas')") or die(mysqli_error($koneksi));
 				
 				if($sql){
 					echo '<script>alert("Berhasil menambahkan data."); document.location="tambah.php";</script>';
@@ -89,6 +91,17 @@
 						<option value="TEKNIK INFORMATIKA">TEKNIK INFORMATIKA</option>
 						<option value="TEKNIK SIPIL">TEKNIK SIPIL</option>
 						<option value="PERTANIAN">PERTANIAN</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">FAKULTAS</label>
+				<div class="col-sm-10">
+					<select name="fakultas" class="form-control" required>
+						<option value="">PILIH FAKULTAS</option>
+						<option value="FAKULTAS KEDOKTERAN">FAKULTAS KEDOKTERAN</option>
+						<option value="FAKULTAS SIPIL">FAKULTAS SIPIL</option>
+						<option value="KEROHANIAN">KEROHANIAN</option>
 					</select>
 				</div>
 			</div>

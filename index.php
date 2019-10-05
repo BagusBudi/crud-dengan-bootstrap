@@ -25,13 +25,16 @@ include('config.php');
 					<li class="nav-item">
 						<a class="nav-link" href="tambah.php">Tambah</a>
 					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="export.php">Export Ke Exsel</a>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	
 	<div class="container" style="margin-top:20px">
-		<h2>Daftar Mahasiswa</h2>
+		<h1>Daftar siswa</h1>
 		
 		<hr>
 		
@@ -40,16 +43,17 @@ include('config.php');
 				<tr>
 					<th>NO.</th>
 					<th>NIM</th>
-					<th>NAMA MAHASISWA</th>
+					<th>NAMA SISWA</th>
 					<th>JENIS KELAMIN</th>
 					<th>JURUSAN</th>
+					<th>FAKULTAS</th>
 					<th>AKSI</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
 				//query ke database SELECT tabel mahasiswa urut berdasarkan id yang paling besar
-				$sql = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC") or die(mysqli_error($koneksi));
+				$sql = mysqli_query($koneksi, "SELECT * FROM data  ORDER BY id DESC") or die(mysqli_error($koneksi));
 				//jika query diatas menghasilkan nilai > 0 maka menjalankan script di bawah if...
 				if(mysqli_num_rows($sql) > 0){
 					//membuat variabel $no untuk menyimpan nomor urut
@@ -64,6 +68,7 @@ include('config.php');
 							<td>'.$data['nama'].'</td>
 							<td>'.$data['jenis_kelamin'].'</td>
 							<td>'.$data['jurusan'].'</td>
+							<td>'.$data['fakultas'].'</td>
 							<td>
 								<a href="edit.php?id='.$data['id'].'" class="badge badge-warning">Edit</a>
 								<a href="delete.php?id='.$data['id'].'" class="badge badge-danger" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">Delete</a>
@@ -76,7 +81,7 @@ include('config.php');
 				}else{
 					echo '
 					<tr>
-						<td colspan="6">Tidak ada data.</td>
+						<td colspan="8">Tidak ada data.</td>
 					</tr>
 					';
 				}
